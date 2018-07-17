@@ -1,10 +1,11 @@
 # SCsub
 Import('env')
 
-env.Append(CPPPATH="C:/Users/raiya/Downloads/cppzmq-master")
-env.Append(CPPPATH="C:/Users/raiya/Downloads/cppzmq-master/libzmq-4.2.5/include")
+cppzmq_location = "C:/Users/raiya/Downloads/cppzmq-master"
+env.Append(CPPPATH=cppzmq_location)
+env.Append(CPPPATH=cppzmq_location+"/libzmq-4.2.5/include")
 env.Append(LIBS=["libzmq-v141-mt-gd-4_2_5.lib"])
-env.Append(LIBPATH=["C:/Users/raiya/Downloads/cppzmq-master/libzmq-build/lib/Debug/"])
+env.Append(LIBPATH=[cppzmq_location+"/libzmq-build/lib/Debug/"])
 
 # Copy("C:/godot/bin/libzmq-v141-mt-gd-4_2_5.dll", "C:/Users/raiya/Downloads/cppzmq-master/libzmq-build/bin/Debug/libzmq-v141-mt-gd-4_2_5.dll")
 

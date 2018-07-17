@@ -10,4 +10,10 @@ After building Godot.exe, this should be imported as a project.
 
 ## BrowserNetwork
 
-when the BrowserGUI is running, this node js program needs t be started. It's the networking backend. git sta
+When the BrowserGUI is running, this node js program needs to be started. It's the networking backend.
+
+## Requirements
+
+Godot Source: https://github.com/godotengine/godot
+Python
+SCons: https://www.scons.org/
