@@ -1,6 +1,6 @@
 # Browser
 
-## Godot Zeromq Module
+## Zeromq
 
 The contents of this folder should be placed inside of a new folder in *godot/modules/*. And SCsub file has to be modified to include the correct library paths.
 
@@ -15,5 +15,7 @@ When the BrowserGUI is running, this node js program needs to be started. It's t
 ## Requirements
 
 Godot Source: https://github.com/godotengine/godot
-Python
+
 SCons: https://www.scons.org/
+
+CPPZMQ: https://github.com/zeromq/cppzmq.git
