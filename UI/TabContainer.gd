@@ -62,12 +62,6 @@ func _on_closeTabButton_pressed():
 			current_tab = previous_tab_idx
 		
 
-func _on_TabContainer_tab_selected(tab):
-	# If the selected tab is not +, print the current tab
-	if get_tab_title(tab) != "+":
-		print("Current tab: " + str(tab) + " UnqID: " + str(get_tab_control(tab).getTabToken()))
-
-
 func _on_urlLineEdit_text_entered(new_text):
 	# Print the entered url on tab
 	var active_tab = get_current_tab_control()
