@@ -5,7 +5,7 @@ var createdTokenCount = 0
 func _ready():
 	print("Ready")
 	#_on_addTab_request(0)
-	#_on_TabContainer_tab_changed(0)
+	_on_TabContainer_tab_changed(0)
 	pass
 
 func createNewToken():
@@ -14,15 +14,12 @@ func createNewToken():
 	
 
 func _on_TabContainer_tab_changed(tabIdx):
-	
-	print_tab_info("tab_changed", tabIdx)
-	
+		
 	# New Tab Request
 	if tabIdx == get_tab_count()-1:
 		# Duplicate "+" tab / Create new "+" tab
 		var activeTab = get_tab_control(tabIdx)
 		var duplicateTab = activeTab.duplicate()
-		print("TabIdx: " + str(tabIdx))
 		
 		# Set Tab Token
 		var newToken = createNewToken()	
@@ -35,6 +32,9 @@ func _on_TabContainer_tab_changed(tabIdx):
 		var duplicateTabIdx = duplicateTab.get_index()
 		set_tab_title(tabIdx, "New Tab")
 		set_tab_title(duplicateTabIdx, "+")
+		print_tab_info("tab_created", tabIdx)
+	else:
+		print_tab_info("tab_changed", tabIdx)
 	
 
 func _on_closeTabButton_pressed():
@@ -79,6 +79,6 @@ func _on_TabContainer_tab_selected(tabIdx):
 
 func print_tab_info(msg, tabIdx):
 	var activeTab = get_tab_control(tabIdx)
-	print(msg + "Tab Index: " + str(tabIdx) + " Tab Token: " + str(activeTab.getTabToken()))
+	print(msg + " Tab Index: " + str(tabIdx) + " Tab Token: " + str(activeTab.getTabToken()))
 	
 	
