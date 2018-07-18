@@ -19,3 +19,15 @@ Godot Source: https://github.com/godotengine/godot
 SCons: https://www.scons.org/
 
 CPPZMQ: https://github.com/zeromq/cppzmq.git
+
+## TODO
+
+1. Update search bar URL on tab switch
+
+2. Clear canvas before inserting new html content
+
+3. Add status bar/notification
+
+4. Functional Refresh button
+
+5. Functional Back button/ Browse history
