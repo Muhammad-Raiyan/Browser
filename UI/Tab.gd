@@ -10,6 +10,7 @@ func _ready():
 
 func setTabToken(var num):
 	tabToken = num
+	print("Tab Token: " + str(tabToken))
 	
 
 func getTabToken():

@@ -1,41 +1,39 @@
 extends TabContainer
 var zmq = Zeromq_wrapper.new()
-var tabTokenList = [1000] # By defauly, the first tab is always set to token 1000
-var MAX_TOKEN = 10000
-var MIN_TOKEN = 1
+var createdTokenCount = 0
 
 func _ready():
 	print("Ready")
+	#_on_addTab_request(0)
+	#_on_TabContainer_tab_changed(0)
 	pass
 
-	
 func createNewToken():
-	var tempToken = randi()%MAX_TOKEN+MIN_TOKEN
-	while(tabTokenList.has(tempToken)):
-			tempToken = randi()%MAX_TOKEN+MIN_TOKEN;
-	return tempToken
+	createdTokenCount = createdTokenCount + 1;
+	return createdTokenCount;
 	
 
-func _on_addTab_request(tabIdx):
-	if get_tab_title(tabIdx) == "+":
-		
+func _on_TabContainer_tab_changed(tabIdx):
+	
+	print_tab_info("tab_changed", tabIdx)
+	
+	# New Tab Request
+	if tabIdx == get_tab_count()-1:
 		# Duplicate "+" tab / Create new "+" tab
 		var activeTab = get_tab_control(tabIdx)
 		var duplicateTab = activeTab.duplicate()
-		print(tabIdx)
+		print("TabIdx: " + str(tabIdx))
 		
 		# Set Tab Token
 		var newToken = createNewToken()	
 		activeTab.setTabToken(newToken)
-		tabTokenList.append(newToken)
 		
 		# Add duplicate Tab to TabContainer  
 		add_child(duplicateTab)
 		
 		# Swap titles of old "+" tab with newly created/duplicated tab 
 		var duplicateTabIdx = duplicateTab.get_index()
-		var title = "New Tab " + str(duplicateTabIdx)
-		set_tab_title(tabIdx, title)
+		set_tab_title(tabIdx, "New Tab")
 		set_tab_title(duplicateTabIdx, "+")
 	
 
@@ -51,9 +49,7 @@ func _on_closeTabButton_pressed():
 	
 	else:
 		# Close requested tab
-		print("Closing tab: " + str(active_tab.get_index()))
-		var i = tabTokenList.find(active_tab.getTabToken())
-		tabTokenList.remove(i)		# make the token available again 
+		print("Closing tab with Idx: " + str(active_tab.get_index()) + " Token: " + str(active_tab.getTabToken()))
 		remove_child(active_tab)
 
 		# Change focus from the closed tab to the previouds tab otherwise on 
@@ -75,5 +71,14 @@ func _on_urlLineEdit_text_entered(new_text):
 	var recieved = zmq.searchRequest(jsonString)
 	active_tab.append_text(recieved)
 
+
+func _on_TabContainer_tab_selected(tabIdx):
+	print("Tab Selected 1: " + str(tabIdx))
+	pass # Replace with function body.
+	
+
+func print_tab_info(msg, tabIdx):
+	var activeTab = get_tab_control(tabIdx)
+	print(msg + "Tab Index: " + str(tabIdx) + " Tab Token: " + str(activeTab.getTabToken()))
 	
 	
