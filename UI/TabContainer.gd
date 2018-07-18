@@ -69,12 +69,11 @@ func _on_urlLineEdit_text_entered(new_text):
 	var jsonString = JSON.print(jsonData)
 	active_tab.url_handler(jsonString)
 	var recieved = zmq.searchRequest(jsonString)
-	active_tab.append_text(recieved)
+	active_tab.insert_text(recieved)
 
 
 func _on_TabContainer_tab_selected(tabIdx):
-	print("Tab Selected 1: " + str(tabIdx))
-	pass # Replace with function body.
+	print_tab_info("tab_selected", tabIdx)
 	
 
 func print_tab_info(msg, tabIdx):

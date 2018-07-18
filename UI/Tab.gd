@@ -33,6 +33,14 @@ func append_text(text):
 	var infoLabel = get_node("infoRichTextLabel")
 	infoLabel.newline()
 	infoLabel.add_text(text)
-	pass
-	
-	
+
+
+"""
+	Clear the label and insert text to the info label 
+"""
+func insert_text(text):
+	var infoLabel = get_node("infoRichTextLabel")
+	infoLabel.clear()
+	infoLabel.add_text(text)
+
+
