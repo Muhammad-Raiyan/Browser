@@ -53,6 +53,9 @@ function handle_request(request) {
     console.log("Token: " + token)
     console.log("url: " + url)
 
+    if (url.startsWith("www"))
+        url = "https://" + url;
+
     page_req(url, function (error, response, body) {
         if (error) {
             console.log('error:', error);
