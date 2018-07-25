@@ -1,6 +1,7 @@
 extends Tabs
 
 var tabToken = 1000;
+var url = null;
 
 func _ready():
 	# Called every time the node is added to the scene.
@@ -15,16 +16,6 @@ func setTabToken(var num):
 func getTabToken():
 	return tabToken;
 	
-
-"""
-	Handles url request
-"""
-func url_handler(url):
-	var infoLabel = get_node("infoRichTextLabel")
-	infoLabel.newline()
-	infoLabel.add_text(url)
-	pass
-
 	
 """
 	Append text to the info label 
@@ -44,3 +35,9 @@ func insert_text(text):
 	infoLabel.add_text(text)
 
 
+func set_url(text):
+	url = text
+
+
+func get_url():
+	return url
