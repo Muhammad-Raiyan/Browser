@@ -118,4 +118,5 @@ show_history={
 
 [rendering]
 
+quality/intended_usage/framebuffer_allocation=1
 environment/default_environment="res://default_env.tres"

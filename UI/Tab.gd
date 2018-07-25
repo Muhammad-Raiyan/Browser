@@ -8,6 +8,8 @@ func _ready():
 	# Initialization here
 	pass
 
+func _process(delta):
+	pass;
 
 func setTabToken(var num):
 	tabToken = num
