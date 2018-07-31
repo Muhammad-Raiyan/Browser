@@ -3,6 +3,10 @@
 #define SUBSCRIBERS_EXPECTED 1
 
 context_t context(1);
+
+socket_t syncservice(context, ZMQ_REP);
+socket_t syncclient(context, ZMQ_REQ);
+
 socket_t publisher(context, ZMQ_PUB);
 socket_t subscriber(context, ZMQ_SUB);
 
@@ -49,41 +53,6 @@ String Zeromq_wrapper::searchRequest(String data_to_search) {
 	return data.c_str();
 }
 
-void Zeromq_wrapper::synchronize_publisher(int syncPort) {
-	std::cout << "syncPort: " << syncPort << std::endl;
-	socket_t syncservice(context, ZMQ_REP);
-	syncservice.bind("tcp://*:" + std::to_string(syncPort));
-
-	//  Get synchronization from subscribers
-	int subscribers = 0;
-	while (subscribers < 1) {
-
-		//  - wait for synchronization request
-		s_recv(syncservice);
-
-		//  - send synchronization reply
-		s_send(syncservice, "");
-
-		subscribers++;
-	}
-	std::cout << "Publisher Synced" << std::endl;
-}
-
-void Zeromq_wrapper::synchronize_subscription(int syncPort) {
-	std::cout << "syncPort: " << syncPort << std::endl;
-	socket_t syncclient(context, ZMQ_REQ);
-	syncclient.connect("tcp://localhost:" + std::to_string(syncPort));
-
-	//  - send a synchronization request
-	s_send(syncclient, "");
-
-	//  - wait for synchronization reply
-	s_recv(syncclient);
-	std::cout << "Subscriptions Synced" << std::endl;
-}
-
-
-
 void Zeromq_wrapper::_bind_methods() {
 	ClassDB::bind_method(D_METHOD("searchRequest", "data_to_search"), &Zeromq_wrapper::searchRequest);
 }
@@ -123,5 +92,49 @@ Zeromq_wrapper::Zeromq_wrapper(int guiPort, int guiSyncPort, int networkPort, in
 }
 
 Zeromq_wrapper::~Zeromq_wrapper() {
+	std::cout << "destructor call";
+	std::string kill_msg = "{\"token\":\"KILL\",\"url\":\" \"}";
+	s_sendmore(publisher, "network_backend");
+	s_send(publisher, kill_msg);
+	Sleep(1); //  Give 0MQ time to flush output
+
+	syncclient.close();
+	syncservice.close();
+	publisher.close();
+	subscriber.close();
 	
+	context.close();
+}
+
+void Zeromq_wrapper::synchronize_publisher(int syncPort) {
+	std::cout << "syncPort: " << syncPort << std::endl;
+	
+	syncservice.bind("tcp://*:" + std::to_string(syncPort));
+
+	//  Get synchronization from subscribers
+	int subscribers = 0;
+	while (subscribers < 1) {
+
+		//  - wait for a sub to start
+		s_recv(syncservice);
+
+		//  - send synchronization reply
+		//s_send(syncservice, "");
+
+		subscribers++;
+	}
+	std::cout << "Publisher Synced" << std::endl;
+}
+
+void Zeromq_wrapper::synchronize_subscription(int syncPort) {
+	std::cout << "syncPort: " << syncPort << std::endl;
+	
+	syncclient.connect("tcp://localhost:" + std::to_string(syncPort));
+
+	//  - send a synchronization request
+	s_send(syncclient, "");
+
+	//  - wait for synchronization reply
+	s_recv(syncclient);
+	std::cout << "Subscriptions Synced" << std::endl;
 }
