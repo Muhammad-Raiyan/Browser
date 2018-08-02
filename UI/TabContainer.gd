@@ -1,22 +1,25 @@
 extends TabContainer
 
 var zmq
-
+var pid
 var createdTokenCount = 0
 
 
 func _ready():
 	var dir = Directory.new()
 	var current_dir = ProjectSettings.globalize_path(dir.get_current_dir())
-	var network_backend_path = current_dir + "../BrowserNetwork/server.exe"
+	var network_backend_path = current_dir + "../BrowserNetwork/server.js"
 	if(dir.file_exists(network_backend_path)):
 		print("Found server.exe at " + network_backend_path)
-		var arg = []
-		OS.execute(network_backend_path, arg, false)
+		var arg = [network_backend_path]
+		pid = OS.execute("node.exe", arg, false)
+		print(pid)
+		#dir.free()
 	else:
 		print("server.exe not found")
 	zmq = Zeromq_wrapper.new()
-	_on_TabContainer_tab_changed(0)
+	#_on_TabContainer_tab_changed(0)
+	create_new_tab()
 	
 
 
@@ -97,7 +100,8 @@ func _on_closeTabButton_pressed():
 func close_browser():
 	print("Closing browser")
 	#OS.kill(pid)
-	get_tree().quit()
+	get_node("/root").get_tree().quit()
+	#get_tree().get_root().quit()
 
 
 func _on_urlLineEdit_text_entered(url):
