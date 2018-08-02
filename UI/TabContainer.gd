@@ -1,12 +1,23 @@
 extends TabContainer
-var zmq = Zeromq_wrapper.new()
+
+var zmq
+
 var createdTokenCount = 0
 
 
 func _ready():
-	print("Ready")
+	var dir = Directory.new()
+	var current_dir = ProjectSettings.globalize_path(dir.get_current_dir())
+	var network_backend_path = current_dir + "../BrowserNetwork/server.exe"
+	if(dir.file_exists(network_backend_path)):
+		print("Found server.exe at " + network_backend_path)
+		var arg = []
+		OS.execute(network_backend_path, arg, false)
+	else:
+		print("server.exe not found")
+	zmq = Zeromq_wrapper.new()
 	_on_TabContainer_tab_changed(0)
-	pass
+	
 
 
 func _process(delta):
@@ -25,7 +36,6 @@ func _process(delta):
 
 	if Input.is_action_just_pressed("show_history"):
 		print("Show history page")
-
 
 
 func _on_TabContainer_tab_changed(tabIdx):
@@ -86,6 +96,7 @@ func _on_closeTabButton_pressed():
 
 func close_browser():
 	print("Closing browser")
+	#OS.kill(pid)
 	get_tree().quit()
 
 
