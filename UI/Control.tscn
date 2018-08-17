@@ -3,7 +3,7 @@
 [ext_resource path="res://TabContainer.gd" type="Script" id=1]
 [ext_resource path="res://Tab.gd" type="Script" id=2]
 
-[node name="Control" type="Control" index="0"]
+[node name="Control" type="Control"]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
@@ -19,7 +19,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." index="0"]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
@@ -33,7 +33,7 @@ size_flags_vertical = 1
 alignment = 0
 _sections_unfolded = [ "Anchor", "Size Flags" ]
 
-[node name="topVBox" type="VBoxContainer" parent="VBoxContainer" index="0"]
+[node name="topVBox" type="VBoxContainer" parent="VBoxContainer"]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -52,7 +52,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="topHBox" type="HBoxContainer" parent="VBoxContainer/topVBox" index="0"]
+[node name="topHBox" type="HBoxContainer" parent="VBoxContainer/topVBox"]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -68,7 +68,7 @@ size_flags_vertical = 1
 alignment = 0
 _sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Rect" ]
 
-[node name="leftButtonHBox" type="HBoxContainer" parent="VBoxContainer/topVBox/topHBox" index="0"]
+[node name="leftButtonHBox" type="HBoxContainer" parent="VBoxContainer/topVBox/topHBox"]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -85,7 +85,7 @@ size_flags_vertical = 1
 alignment = 0
 _sections_unfolded = [ "Margin", "Rect", "Size Flags" ]
 
-[node name="backButton" type="ToolButton" parent="VBoxContainer/topVBox/topHBox/leftButtonHBox" index="0"]
+[node name="backButton" type="ToolButton" parent="VBoxContainer/topVBox/topHBox/leftButtonHBox"]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -108,7 +108,7 @@ flat = false
 align = 1
 _sections_unfolded = [ "Margin", "Rect", "Size Flags" ]
 
-[node name="forwardButton" type="ToolButton" parent="VBoxContainer/topVBox/topHBox/leftButtonHBox" index="1"]
+[node name="forwardButton" type="ToolButton" parent="VBoxContainer/topVBox/topHBox/leftButtonHBox"]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -132,7 +132,7 @@ flat = false
 align = 1
 _sections_unfolded = [ "Size Flags" ]
 
-[node name="reloadButton" type="ToolButton" parent="VBoxContainer/topVBox/topHBox/leftButtonHBox" index="2"]
+[node name="reloadButton" type="ToolButton" parent="VBoxContainer/topVBox/topHBox/leftButtonHBox"]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -156,7 +156,7 @@ flat = false
 align = 1
 _sections_unfolded = [ "Size Flags" ]
 
-[node name="urlHBox" type="HBoxContainer" parent="VBoxContainer/topVBox/topHBox" index="1"]
+[node name="urlHBox" type="HBoxContainer" parent="VBoxContainer/topVBox/topHBox"]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -172,9 +172,9 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 3
 size_flags_vertical = 1
 alignment = 0
-_sections_unfolded = [ "Anchor", "Grow Direction", "Rect", "Size Flags" ]
+_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Rect", "Size Flags" ]
 
-[node name="urlLineEdit" type="LineEdit" parent="VBoxContainer/topVBox/topHBox/urlHBox" index="0"]
+[node name="urlLineEdit" type="LineEdit" parent="VBoxContainer/topVBox/topHBox/urlHBox"]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -191,13 +191,14 @@ size_flags_vertical = 1
 secret_character = "*"
 focus_mode = 2
 context_menu_enabled = true
+clear_button_enabled = false
 placeholder_alpha = 0.6
 caret_blink = false
 caret_blink_speed = 0.65
 caret_position = 0
-_sections_unfolded = [ "Size Flags" ]
+_sections_unfolded = [ "Rect", "Size Flags" ]
 
-[node name="rightHBox" type="HBoxContainer" parent="VBoxContainer/topVBox/topHBox" index="2"]
+[node name="rightHBox" type="HBoxContainer" parent="VBoxContainer/topVBox/topHBox"]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -215,7 +216,7 @@ size_flags_vertical = 1
 alignment = 0
 _sections_unfolded = [ "Anchor", "Rect" ]
 
-[node name="closeTabButton" type="Button" parent="VBoxContainer/topVBox/topHBox/rightHBox" index="0"]
+[node name="closeTabButton" type="Button" parent="VBoxContainer/topVBox/topHBox/rightHBox"]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -238,7 +239,7 @@ flat = false
 align = 1
 _sections_unfolded = [ "Size Flags", "shortcut" ]
 
-[node name="TabContainer" type="TabContainer" parent="VBoxContainer" index="1"]
+[node name="TabContainer" type="TabContainer" parent="VBoxContainer"]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -257,11 +258,8 @@ tabs_visible = true
 drag_to_rearrange_enabled = false
 script = ExtResource( 1 )
 _sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Rect", "Size Flags" ]
-__meta__ = {
-"_edit_lock_": true
-}
 
-[node name="+" type="Tabs" parent="VBoxContainer/TabContainer" index="0"]
+[node name="+" type="ScrollContainer" parent="VBoxContainer/TabContainer"]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
@@ -271,44 +269,34 @@ margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 3
-tab_align = 1
-scrolling_enabled = true
-drag_to_rearrange_enabled = false
-script = ExtResource( 2 )
-_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Rect" ]
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="infoRichTextLabel" type="RichTextLabel" parent="VBoxContainer/TabContainer/+" index="0"]
-anchor_left = 0.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = -526.0
-rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = true
 mouse_filter = 0
 mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-bbcode_enabled = false
-bbcode_text = ""
-visible_characters = -1
-percent_visible = 1.0
-meta_underlined = true
-tab_size = 4
-text = "Info:"
-scroll_active = true
-scroll_following = false
-selection_enabled = false
-override_selected_font_color = false
-_sections_unfolded = [ "Anchor", "Margin", "Rect" ]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_horizontal_enabled = true
+scroll_horizontal = 0
+scroll_vertical_enabled = true
+scroll_vertical = 0
+scroll_deadzone = 0
+script = ExtResource( 2 )
+_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Rect" ]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/+"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 1016.0
+margin_bottom = 530.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 0
+_sections_unfolded = [ "Size Flags" ]
 
 [connection signal="text_entered" from="VBoxContainer/topVBox/topHBox/urlHBox/urlLineEdit" to="VBoxContainer/TabContainer" method="_on_urlLineEdit_text_entered"]
 [connection signal="pressed" from="VBoxContainer/topVBox/topHBox/rightHBox/closeTabButton" to="VBoxContainer/TabContainer" method="_on_closeTabButton_pressed"]

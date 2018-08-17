@@ -43,8 +43,10 @@ publisher.bind('tcp://*:6101', function (err) {
 
 // Function to handle requests
 function handle_request(request) {
-    var url = request.url
     var req_token =  request.token
+    var arguments = request.arg
+    var url = arguments.url
+    
     console.log("Token: " + req_token)
     console.log("url: " + url)  
 
