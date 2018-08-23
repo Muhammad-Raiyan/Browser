@@ -54,6 +54,7 @@ function handle_request(request) {
     if (url.startsWith("www"))
         url = "https://" + url;
 
+    // Making the request for the page.
     progress( page_req(url, function (error, response, body) {
         if (error) {
             console.log('error:', error);
@@ -71,6 +72,7 @@ function handle_request(request) {
             publisher.send([publisherEnvelope, response.statusMessage]);
         }
     })).on('progress', function (state) {
+        // Object to store necessary information.
         var stats = {
             percent: 0,
             bytes: 0
@@ -82,7 +84,8 @@ function handle_request(request) {
         if (state.size.transferred)
             stats.bytes = state.size.transferred;
 
-        publisher.send([progressEnvelope, JSON.stringify(stats)])
+        console.log(JSON.stringify(stats))
+        //publisher.send([progressEnvelope, JSON.stringify(stats)])
 
     })
     
