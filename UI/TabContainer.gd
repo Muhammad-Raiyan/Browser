@@ -29,6 +29,7 @@ func _process(delta):
 
 	if Input.is_action_just_pressed("new_tab"):
 		create_new_tab()
+		#set_current_tab(1)
 
 	if Input.is_action_just_pressed("close_all_tab"):
 		close_browser()
@@ -75,7 +76,7 @@ func create_new_tab():
 	set_tab_title(tabIdx, "New Tab")
 	set_tab_title(duplicateTabIdx, "+")
 	print_tab_info("tab_created", tabIdx)
-
+	set_current_tab(tabIdx)
 
 
 func _on_closeTabButton_pressed():

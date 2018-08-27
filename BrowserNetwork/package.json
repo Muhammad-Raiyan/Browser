@@ -10,7 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "parse5": "^5.1.0",
     "request": "^2.87.0",
+    "request-progress": "^3.0.0",
     "zeromq": "^4.6.0"
   }
 }
