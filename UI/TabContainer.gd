@@ -37,9 +37,16 @@ func _process(delta):
 	# PLACE HOLDERS for future shortuts
 	if Input.is_action_just_pressed("reload_page"):
 		print("Reload page")
+		var activeTab = get_current_tab_control()
+		var textLabel = RichTextLabel.new()
 
 	if Input.is_action_just_pressed("show_history"):
 		print("Show history page")
+
+	var response = zmq.receive()
+	if response.length()!=0:
+		print(response)
+		get_current_tab_control().append_text(response)
 
 
 func _on_TabContainer_tab_changed(tabIdx):
@@ -115,8 +122,8 @@ func _on_urlLineEdit_text_entered(url):
 	active_tab.set_url(url)
 	
 	var jsonString = JSON.print(jsonData)
-	var recieved = zmq.searchRequest(jsonString)
-	active_tab.insert_text(recieved)
+	zmq.publish("network_backend",jsonString)
+	#active_tab.insert_text(recieved)
 
 
 # Placeholder

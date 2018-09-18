@@ -64,7 +64,7 @@ function handle_request(request) {
 
             var document = parser.parse(body);
             var str = parser.serialize(document);
-
+            
             publisher.send([publisherEnvelope, str]);
 
         } else if (response) {

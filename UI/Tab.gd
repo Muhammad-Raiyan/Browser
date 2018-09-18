@@ -1,4 +1,4 @@
-extends Tabs
+extends Container
 
 var tabToken = 1000;
 var url = null;

@@ -262,7 +262,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="+" type="Tabs" parent="VBoxContainer/TabContainer"]
+[node name="+" type="Container" parent="VBoxContainer/TabContainer"]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 1.0
@@ -277,14 +277,8 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 3
-tab_align = 1
-scrolling_enabled = true
-drag_to_rearrange_enabled = false
 script = ExtResource( 2 )
 _sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Rect" ]
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="infoRichTextLabel" type="RichTextLabel" parent="VBoxContainer/TabContainer/+"]
 anchor_left = 0.0
