@@ -1,0 +1,14 @@
+{
+  "name": "renderdemo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "render.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Muhammad Islam",
+  "license": "ISC",
+  "dependencies": {
+    "zeromq": "^4.6.0"
+  }
+}

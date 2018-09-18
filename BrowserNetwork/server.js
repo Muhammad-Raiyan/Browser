@@ -12,6 +12,31 @@ const subscriberEnvelope = "network_backend"
 const progressEnvelope = "req_progress"
 const SUBSCRIBERS_EXPECTED = 1;
 
+const default_text_box = {
+    type: "render",
+    item: "text-box",
+    param: {
+      anchor_left: 0.0,
+      anchor_right: 1.0,
+      anchor_top: 0.0,
+      anchor_bottom: 1.0,
+      text: ""
+  }
+}
+
+const temp1 = {
+      type: "render",
+      item: "text-box",
+      param: {
+        anchor_left: 0.5,
+        anchor_right: 1.0,
+        anchor_top: 0.0,
+        anchor_bottom: 1.0,
+        text: "When you consider the radiance, that it does not withhold itself but pours its abundance without selection into every nook and cranny not overhung or hidden; when you consider"
+    }
+}
+      
+
 // Subscription Synchronization
 synchronizeSubscription.connect('tcp://localhost:5100')
 synchronizeSubscription.send('')
@@ -64,8 +89,12 @@ function handle_request(request) {
 
             var document = parser.parse(body);
             var str = parser.serialize(document);
-            
-            publisher.send([publisherEnvelope, str]);
+            var msg = {
+                token: req_token,
+                data: default_text_box
+            }
+            default_text_box.param.text = str
+            publisher.send([publisherEnvelope, JSON.stringify(msg)]);
 
         } else if (response) {
             console.log('Reponse status not OK:', response.statusCode);
