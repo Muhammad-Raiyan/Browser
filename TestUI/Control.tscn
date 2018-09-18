@@ -1,0 +1,317 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Control.gd" type="Script" id=1]
+[ext_resource path="res://Tabs.gd" type="Script" id=2]
+[ext_resource path="res://icons/icons_add.png" type="Texture" id=3]
+[ext_resource path="res://icons/icon_back_arrow.png" type="Texture" id=4]
+[ext_resource path="res://icons/icons_right_arrow.png" type="Texture" id=5]
+[ext_resource path="res://icons/icons_rotate.png" type="Texture" id=6]
+[ext_resource path="res://icons/icons_menu_30.png" type="Texture" id=7]
+
+[sub_resource type="CanvasItemMaterial" id=1]
+
+render_priority = 0
+blend_mode = 0
+light_mode = 0
+
+[node name="Control" type="Control"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+script = ExtResource( 1 )
+_sections_unfolded = [ "Material", "Theme", "Visibility", "theme" ]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+alignment = 0
+_sections_unfolded = [ "Anchor", "Custom Constants", "Grow Direction", "Margin", "Material" ]
+
+[node name="TabPanelHBox" type="HBoxContainer" parent="VBoxContainer"]
+material = SubResource( 1 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 1024.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 30, 30 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+alignment = 0
+_sections_unfolded = [ "Anchor", "Margin", "Material", "Size Flags", "Visibility", "material" ]
+
+[node name="Tabs" type="Tabs" parent="VBoxContainer/TabPanelHBox"]
+light_mask = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 984.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 140, 30 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+custom_colors/font_color_fg = Color( 0, 0, 0, 1 )
+tab_align = 0
+tab_close_display_policy = 2
+scrolling_enabled = true
+drag_to_rearrange_enabled = false
+script = ExtResource( 2 )
+_sections_unfolded = [ "Custom Constants", "Custom Styles", "Material", "Visibility", "custom_styles/button", "custom_styles/panel", "custom_styles/tab_bg", "custom_styles/tab_fg", "material", "theme" ]
+
+[node name="ToolButton" type="ToolButton" parent="VBoxContainer/TabPanelHBox"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 988.0
+margin_right = 1024.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 35, 30 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 1
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 0
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 1
+shortcut = null
+group = null
+icon = ExtResource( 3 )
+flat = false
+align = 0
+_sections_unfolded = [ "Custom Colors", "Custom Constants", "Custom Styles", "Grow Direction", "Margin", "Mouse", "Rect", "Size Flags" ]
+
+[node name="SearchPanelHBox" type="GridContainer" parent="VBoxContainer"]
+editor/display_folded = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 36.0
+margin_right = 1024.0
+margin_bottom = 76.0
+rect_min_size = Vector2( 0, 30 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+columns = 3
+_sections_unfolded = [ "Anchor", "Margin", "Material", "Size Flags", "Visibility" ]
+
+[node name="ButtonHBoxPanel" type="HBoxContainer" parent="VBoxContainer/SearchPanelHBox"]
+modulate = Color( 0.956863, 0.901961, 0.901961, 1 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 124.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 100, 30 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+alignment = 0
+_sections_unfolded = [ "Visibility" ]
+
+[node name="BackButton" type="ToolButton" parent="VBoxContainer/SearchPanelHBox/ButtonHBoxPanel"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 36.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 30, 30 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+icon = ExtResource( 4 )
+flat = false
+align = 1
+_sections_unfolded = [ "Margin", "Rect", "Size Flags" ]
+
+[node name="FwdButton" type="ToolButton" parent="VBoxContainer/SearchPanelHBox/ButtonHBoxPanel"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 40.0
+margin_right = 84.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 30, 30 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+icon = ExtResource( 5 )
+flat = false
+align = 1
+_sections_unfolded = [ "Margin", "Rect", "Size Flags" ]
+
+[node name="RfrshButton" type="ToolButton" parent="VBoxContainer/SearchPanelHBox/ButtonHBoxPanel"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 88.0
+margin_right = 124.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 30, 30 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+icon = ExtResource( 6 )
+flat = false
+align = 1
+_sections_unfolded = [ "Custom Styles", "custom_styles/hover" ]
+
+[node name="UrlHBoxContainer" type="HBoxContainer" parent="VBoxContainer/SearchPanelHBox"]
+editor/display_folded = true
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 128.0
+margin_right = 978.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 300, 30 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 1
+alignment = 0
+_sections_unfolded = [ "Margin" ]
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/SearchPanelHBox/UrlHBoxContainer"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 850.0
+margin_bottom = 40.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 1
+size_flags_horizontal = 3
+size_flags_vertical = 1
+secret_character = "*"
+focus_mode = 2
+context_menu_enabled = true
+clear_button_enabled = false
+placeholder_alpha = 0.6
+caret_blink = true
+caret_blink_speed = 0.65
+caret_position = 0
+_sections_unfolded = [ "Custom Colors", "Custom Constants", "Margin" ]
+
+[node name="MenuButton" type="ToolButton" parent="VBoxContainer/SearchPanelHBox"]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 982.0
+margin_right = 1024.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 35, 30 )
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 9
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+icon = ExtResource( 7 )
+flat = false
+align = 1
+_sections_unfolded = [ "Custom Colors", "Custom Fonts", "Custom Styles", "Rect", "custom_styles/hover", "custom_styles/normal" ]
+
+[node name="Line2D" type="Line2D" parent="VBoxContainer"]
+points = PoolVector2Array( 14, 85, 1010, 85 )
+width = 1.0
+default_color = Color( 0, 0, 0, 1 )
+texture_mode = 1603487248
+sharp_limit = 2.0
+round_precision = 8
+_sections_unfolded = [ "Transform", "points" ]
+
+[node name="PanelContainer" type="VBoxContainer" parent="VBoxContainer"]
+visible = false
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 80.0
+margin_right = 1024.0
+margin_bottom = 600.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 1
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 0
+_sections_unfolded = [ "Size Flags", "Visibility" ]
+
+[connection signal="pressed" from="VBoxContainer/TabPanelHBox/ToolButton" to="." method="_on_add_tab_Button_pressed"]
