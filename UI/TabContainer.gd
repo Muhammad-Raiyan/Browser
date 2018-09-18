@@ -18,7 +18,7 @@ func _ready():
 	else:
 		print("server.exe not found")
 	zmq = Zeromq_wrapper.new()
-	#_on_TabContainer_tab_changed(0)
+	
 	create_new_tab()
 	
 
@@ -45,12 +45,26 @@ func _process(delta):
 
 	var response = zmq.receive()
 	if response.length()!=0:
-		print(response)
-		get_current_tab_control().append_text(response)
+		#print(response)
+		var textLabel = RichTextLabel.new()
+		var active_tab = get_current_tab_control()
+		
+		
+		textLabel.anchor_left=0.0
+		textLabel.anchor_top=1.0
+		textLabel.anchor_right=1.0
+		textLabel.anchor_bottom=1.0
+		textLabel.size_flags_horizontal = 1
+		textLabel.size_flags_vertical = 1
+		textLabel.add_text(response)
+		active_tab.add_child(textLabel, true)
+		active_tab.print_tree()
+		
+		
 
 
 func _on_TabContainer_tab_changed(tabIdx):
-		
+	
 	# New Tab Request
 	if tabIdx == get_tab_count()-1:
 		create_new_tab()
@@ -63,12 +77,14 @@ func _on_TabContainer_tab_changed(tabIdx):
 			searchbar.clear()
 		if searchbar == null && url != null:
 			searchbar.append_at_cursor(url)
+	get_current_tab_control().print_tree()
 
 
 func create_new_tab():
 	var tabIdx = get_tab_count()-1
 	# Duplicate "+" tab / Create new "+" tab
 	var activeTab = get_tab_control(tabIdx)
+	
 	var duplicateTab = activeTab.duplicate()
 		
 	# Set Tab Token
@@ -76,7 +92,7 @@ func create_new_tab():
 	activeTab.setTabToken(newToken)
 		
 	# Add duplicate Tab to TabContainer  
-	add_child(duplicateTab)
+	add_child(duplicateTab, true)
 		
 	# Swap titles of old "+" tab with newly created/duplicated tab 
 	var duplicateTabIdx = duplicateTab.get_index()
@@ -138,4 +154,13 @@ func createNewToken():
 func print_tab_info(msg, tabIdx):
 	var activeTab = get_tab_control(tabIdx)
 	print(msg + " Tab Index: " + str(tabIdx) + " Tab Token: " + str(activeTab.getTabToken()))
+	
+func getallnodes(node):
+	for N in node.get_children():
+        if N.get_child_count() > 0:
+            print("["+N.get_name()+":"+ N.get_type()+"]")
+            getallnodes(N)
+        else:
+            # Do something
+            print("- "+N.get_name()+":"+ N.get_type())
 

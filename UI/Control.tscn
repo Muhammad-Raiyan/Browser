@@ -280,31 +280,6 @@ size_flags_vertical = 3
 script = ExtResource( 2 )
 _sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Rect" ]
 
-[node name="infoRichTextLabel" type="RichTextLabel" parent="VBoxContainer/TabContainer/+"]
-anchor_left = 0.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = -526.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = true
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-bbcode_enabled = false
-bbcode_text = ""
-visible_characters = -1
-percent_visible = 1.0
-meta_underlined = true
-tab_size = 4
-text = "Info:"
-scroll_active = true
-scroll_following = false
-selection_enabled = false
-override_selected_font_color = false
-_sections_unfolded = [ "Anchor", "Margin", "Rect" ]
-
 [connection signal="text_entered" from="VBoxContainer/topVBox/topHBox/urlHBox/urlLineEdit" to="VBoxContainer/TabContainer" method="_on_urlLineEdit_text_entered"]
 [connection signal="pressed" from="VBoxContainer/topVBox/topHBox/rightHBox/closeTabButton" to="VBoxContainer/TabContainer" method="_on_closeTabButton_pressed"]
 [connection signal="tab_changed" from="VBoxContainer/TabContainer" to="VBoxContainer/TabContainer" method="_on_TabContainer_tab_changed"]
