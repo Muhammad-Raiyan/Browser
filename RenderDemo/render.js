@@ -11,7 +11,6 @@ synchronizePublisher.on('message', function (request) {
     synchronizePublisher.send('')
     if (subscriberCount >= SUBSCRIBERS_EXPECTED){
         console.log("Publisher Synched")
-        console.log("Sent")
         publisher.send([publisherEnvelope, "Hello"])
     }
 })

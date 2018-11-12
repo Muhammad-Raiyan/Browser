@@ -1,11 +1,13 @@
 extends TabContainer
-
+# https://www.york.ac.uk/teaching/cws/wws/webpage1.html
 var zmq
 var pid
 var createdTokenCount = 0
 var demo_txt1 = "When you consider the radiance, that it does not withhold itself but pours its abundance without selection into every nook and cranny not overhung or hidden; when you consider"
-var icon = preload("icon.png")
+#var icon = preload("icon.png")
 var hist = []
+
+var count_calls = 0;
 
 func _ready():
 	var dir = Directory.new()
@@ -39,41 +41,7 @@ func _process(delta):
 	# PLACE HOLDERS for future shortuts
 	if Input.is_action_just_pressed("reload_page"):
 		print("Reload page")
-		var activeTab = get_current_tab_control()
-		
-		var textLabel = RichTextLabel.new()
-		textLabel.anchor_left=0.5
-		textLabel.anchor_top=0.0
-		textLabel.anchor_right=1.0
-		textLabel.anchor_bottom=1.0
-		textLabel.size_flags_horizontal = 1
-		textLabel.size_flags_vertical = 1
-		textLabel.margin_left=0
-		textLabel.margin_top=0
-		textLabel.margin_right=0
-		textLabel.margin_bottom=0
-		textLabel.add_text(demo_txt1)
-		activeTab.add_child(textLabel, true)
-		
-		var sprt = Sprite.new()
-		sprt.set_texture(icon)
-		sprt.move_local_x(30)
-		sprt.move_local_y(30)
-		activeTab.add_child(sprt)
-		
-		var textLabel2 = RichTextLabel.new()
-		textLabel2.anchor_left=0.0
-		textLabel2.anchor_top=0.2
-		textLabel2.anchor_right=1.0
-		textLabel2.anchor_bottom=1.0
-		textLabel2.size_flags_horizontal = 1
-		textLabel2.size_flags_vertical = 1
-		textLabel2.margin_left=0
-		textLabel2.margin_top=0
-		textLabel2.margin_right=0
-		textLabel2.margin_bottom=0
-		textLabel2.add_text(demo_txt1)
-		activeTab.add_child(textLabel2, true)
+		print("Calls: " + str(count_calls))
 
 	if Input.is_action_just_pressed("show_history"):
 		print(hist)
@@ -81,12 +49,13 @@ func _process(delta):
 	var response = zmq.receive()
 	if response.length()!=0:
 		var parsedResponse = parse_json(response)
-		print(parsedResponse.data)
+		#print(parsedResponse.data)
+		count_calls = count_calls + 1
 		
 		var active_tab = get_current_tab_control()
+		var param = parsedResponse.data.param
 		if parsedResponse.data.item=="text-box":
 			var textLabel = RichTextLabel.new()
-			var param = parsedResponse.data.param
 			textLabel.anchor_left=param.anchor_left
 			textLabel.anchor_top=param.anchor_top
 			textLabel.anchor_right=param.anchor_right
@@ -97,16 +66,20 @@ func _process(delta):
 			textLabel.margin_top=0
 			textLabel.margin_right=0
 			textLabel.margin_bottom=0
-			print(param.text)
+			#print(param.text)
+			textLabel.newline()
 			textLabel.add_text(param.text)
 			active_tab.add_child(textLabel, true)
+		
 		if parsedResponse.data.item=="image":
-			var param = parsedResponse.data.param
 			var sprt = Sprite.new()
 			sprt.set_texture(param.name)
 			sprt.move_local_x(param.x)
 			sprt.move_local_y(param.y)
 			active_tab.add_child(sprt)
+		
+		if parsedResponse.data.item=="text":
+			active_tab.append_text(param.text)
 
 func _on_TabContainer_tab_changed(tabIdx):
 	
