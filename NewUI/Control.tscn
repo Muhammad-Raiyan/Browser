@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Control.gd" type="Script" id=1]
 [ext_resource path="res://Tabs.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://icons/icons_right_arrow.png" type="Texture" id=5]
 [ext_resource path="res://icons/icons_rotate.png" type="Texture" id=6]
 [ext_resource path="res://icons/icons_menu_30.png" type="Texture" id=7]
+[ext_resource path="res://TabContainer.gd" type="Script" id=8]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 
@@ -109,7 +110,6 @@ align = 0
 _sections_unfolded = [ "Custom Colors", "Custom Constants", "Custom Styles", "Grow Direction", "Margin", "Mouse", "Rect", "Size Flags" ]
 
 [node name="SearchPanelHBox" type="GridContainer" parent="VBoxContainer"]
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -128,6 +128,7 @@ columns = 3
 _sections_unfolded = [ "Anchor", "Margin", "Material", "Size Flags", "Visibility" ]
 
 [node name="ButtonHBoxPanel" type="HBoxContainer" parent="VBoxContainer/SearchPanelHBox"]
+editor/display_folded = true
 modulate = Color( 0.956863, 0.901961, 0.901961, 1 )
 anchor_left = 0.0
 anchor_top = 0.0
@@ -296,8 +297,7 @@ sharp_limit = 2.0
 round_precision = 8
 _sections_unfolded = [ "Transform", "points" ]
 
-[node name="PanelContainer" type="VBoxContainer" parent="VBoxContainer"]
-visible = false
+[node name="TabContainer" type="TabContainer" parent="VBoxContainer"]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -307,11 +307,15 @@ margin_right = 1024.0
 margin_bottom = 600.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-mouse_filter = 1
+mouse_filter = 0
 mouse_default_cursor_shape = 0
-size_flags_horizontal = 3
+size_flags_horizontal = 1
 size_flags_vertical = 3
-alignment = 0
-_sections_unfolded = [ "Size Flags", "Visibility" ]
+tab_align = 1
+tabs_visible = false
+drag_to_rearrange_enabled = false
+script = ExtResource( 8 )
+_sections_unfolded = [ "Margin", "Size Flags" ]
 
 [connection signal="pressed" from="VBoxContainer/TabPanelHBox/ToolButton" to="." method="_on_add_tab_Button_pressed"]
+[connection signal="text_entered" from="VBoxContainer/SearchPanelHBox/UrlHBoxContainer/LineEdit" to="." method="_on_LineEdit_text_entered"]
