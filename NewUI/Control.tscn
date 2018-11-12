@@ -221,7 +221,6 @@ align = 1
 _sections_unfolded = [ "Custom Styles", "custom_styles/hover" ]
 
 [node name="UrlHBoxContainer" type="HBoxContainer" parent="VBoxContainer/SearchPanelHBox"]
-editor/display_folded = true
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0

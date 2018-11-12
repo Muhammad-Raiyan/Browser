@@ -2,7 +2,7 @@ extends Tabs
 # class member variables go here, for example:
 # var a = 2
 # var b = "textvar"
-onready var control = get_tree().get_root().get_node("Control")
+onready var mainControl = get_tree().get_root().get_node("Control")
 # Called when the node enters the scene tree for the first time.
 
 func _ready():
@@ -31,9 +31,9 @@ func _on_tab_changed(idx):
 	
 func _on_tab_close(idx):
 	remove_tab(idx)
-	var tabContainer = control.tab_container
+	var tabContainer = mainControl.tab_container
 	tabContainer._on_tab_close(idx)
 	
 	if(get_tab_count()==0):
-		control.close_browser()
+		mainControl.close_browser()
 

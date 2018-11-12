@@ -4,6 +4,8 @@ extends TabContainer
 # var a = 2
 # var b = "text"
 # Called when the node enters the scene tree for the first time.
+onready var mainControl = get_tree().get_root().get_node("Control")
+
 func _ready():
 	self.connect("tab_changed", self, "_on_tab_changed")
 	
@@ -20,12 +22,11 @@ func add_new_tab():
 	new_tab_node.set_name("TabNode")
 	new_tab_node.size_flags_vertical = SIZE_EXPAND_FILL
 	
-	
 	var debugTexLabel = RichTextLabel.new()
 	debugTexLabel.set_name("debugTexLabel")
 	debugTexLabel.add_text("Debug Text")
-	debugTexLabel.margin_right = 100
-	debugTexLabel.margin_bottom = 100
+	debugTexLabel.margin_right = 1000
+	debugTexLabel.margin_bottom = 580
 	new_tab_node.add_child(debugTexLabel)
 	
 	add_child(new_tab_node)
@@ -37,11 +38,18 @@ func add_new_tab():
 
 
 func _on_tab_changed(idx):
-	var tab_container = get_tree().get_root().get_node("Control/VBoxContainer/TabContainer")
+#	mainControl.clear_url_bar()
+#	mainControl.set_url(idx)
 	print("container_tab_id: " + str(idx))
-	#tab_container.current_tab = idx
-	pass;
+	
 	
 func _on_tab_close(idx):
 	remove_child(get_tab_control(idx))
 	
+func get_active_tab_id():
+	return current_tab
+	
+func append_text(text):
+	var infoLabel = get_current_tab_control().get_child(0)
+	infoLabel.newline()
+	infoLabel.add_text(text)

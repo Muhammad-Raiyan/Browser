@@ -7,9 +7,23 @@ var tab_token = -1
 onready var tabs = get_node("VBoxContainer/TabPanelHBox/Tabs")
 onready var tab_container = get_node("VBoxContainer/TabContainer")
 
+var zmq
+var pid
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass;
+	var dir = Directory.new()
+	var current_dir = ProjectSettings.globalize_path(dir.get_current_dir())
+	var network_backend_path = current_dir + "../BrowserNetwork/server.js"
+	if(dir.file_exists(network_backend_path)):
+		print("Found server.exe at " + network_backend_path)
+		var arg = [network_backend_path]
+		pid = OS.execute("node.exe", arg, false)
+		print(pid)
+		#dir.free()
+	else:
+		print("server.exe not found")
+	zmq = Zeromq_wrapper.new()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -17,6 +31,14 @@ func _process(delta):
 		print(tab_tokens)
 		#get_node("VBoxContainer/TabNode").print_tree()
 		#getallnodes(get_node("VBoxContainer/TabNode"))
+		
+	var response = zmq.receive()
+	if response.length()!=0:
+		var parsedResponse = parse_json(response)
+		var param = parsedResponse.data.param
+		
+		if parsedResponse.data.item=="text":
+			tab_container.append_text(param.text)
 	pass
 
 
@@ -44,3 +66,26 @@ func getallnodes(node):
             # Do something
             print("- "+N.get_class())
 
+
+func clear_url_bar():
+	var urlBar = get_node("VBoxContainer/SearchPanelHBox/UrlHBoxContainer/LineEdit")
+	urlBar.clear()
+	pass;
+	
+
+func set_url(idx):
+	var urlBar = get_node("VBoxContainer/SearchPanelHBox/UrlHBoxContainer/LineEdit")
+
+func _on_LineEdit_text_entered(new_text):
+	var activeTabId = tab_container.get_active_tab_id()
+	var info = {
+		"token": activeTabId,
+		"url": new_text
+	}
+	
+	var jsonString = JSON.print(info)
+	print(jsonString)
+	zmq.publish("network_backend",jsonString)
+	#tab_info.append(info)
+	
+	pass # Replace with function body.
