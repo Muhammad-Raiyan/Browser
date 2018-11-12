@@ -10,14 +10,12 @@ func _ready():
 	self.connect("tab_changed", self, "_on_tab_changed")
 	
 	add_new_tab()
-	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
 
 func add_new_tab():
-	
 	var new_tab_node = Control.new()
 	new_tab_node.set_name("TabNode")
 	new_tab_node.size_flags_vertical = SIZE_EXPAND_FILL
@@ -25,8 +23,9 @@ func add_new_tab():
 	var debugTexLabel = RichTextLabel.new()
 	debugTexLabel.set_name("debugTexLabel")
 	debugTexLabel.add_text("Debug Text")
-	debugTexLabel.margin_right = 1000
-	debugTexLabel.margin_bottom = 580
+
+	debugTexLabel.anchor_right = 1
+	debugTexLabel.anchor_bottom = 0.99
 	new_tab_node.add_child(debugTexLabel)
 	
 	add_child(new_tab_node)
@@ -38,8 +37,8 @@ func add_new_tab():
 
 
 func _on_tab_changed(idx):
-#	mainControl.clear_url_bar()
-#	mainControl.set_url(idx)
+	mainControl.clear_url_bar()
+	mainControl.set_url(idx)
 	print("container_tab_id: " + str(idx))
 	
 	
@@ -53,3 +52,8 @@ func append_text(text):
 	var infoLabel = get_current_tab_control().get_child(0)
 	infoLabel.newline()
 	infoLabel.add_text(text)
+	
+func clear_text():
+	var infoLabel = get_current_tab_control().get_child(0)
+	infoLabel.clear()
+
