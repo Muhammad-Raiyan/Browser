@@ -36,4 +36,7 @@ func _on_tab_close(idx):
 	
 	if(get_tab_count()==0):
 		mainControl.close_browser()
+	
 
+func close_curent_tab():
+	_on_tab_close(current_tab)

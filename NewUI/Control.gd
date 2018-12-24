@@ -32,9 +32,23 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if Input.is_action_just_pressed("reload_page"):
-		print(urls)
-		#get_node("VBoxContainer/TabNode").print_tree()
-		#getallnodes(get_node("VBoxContainer/TabNode"))
+		tab_container.add_text_label("Text label test")
+	
+	if Input.is_action_just_pressed("clear_page"):
+		tab_container.clear_page()
+		pass
+		
+	if Input.is_action_just_pressed("close_all_tab"):
+		close_browser()
+		pass
+	
+	if Input.is_action_just_pressed("close_tab"):
+		tabs.close_curent_tab()
+		pass
+		
+	if Input.is_action_just_pressed("new_tab"):
+		_on_add_tab_Button_pressed()
+
 		
 	var response = zmq.receive()
 	if response.length()!=0:
@@ -42,7 +56,7 @@ func _process(delta):
 		var param = parsedResponse.data.param
 		
 		if parsedResponse.data.item=="text":
-			tab_container.append_text(param.text)
+			tab_container.add_text_label(param.text)
 	pass
 
 
@@ -75,17 +89,17 @@ func getallnodes(node):
 func clear_url_bar():
 	var urlBar = get_node("VBoxContainer/SearchPanelHBox/UrlHBoxContainer/LineEdit")
 	urlBar.clear()
-	pass;
 	
 
 func set_url(idx):
 	var urlBar = get_node("VBoxContainer/SearchPanelHBox/UrlHBoxContainer/LineEdit")
 	urlBar.append_at_cursor(urls[idx])
 
+
 func _on_LineEdit_text_entered(new_text):
 	
 	var activeTabId = tab_container.get_active_tab_id()
-	tab_container.clear_text()
+	tab_container.clear_page()
 	urls[activeTabId] = new_text
 	
 	var info = {
@@ -96,5 +110,4 @@ func _on_LineEdit_text_entered(new_text):
 	var jsonString = JSON.print(info)
 	print(jsonString)
 	zmq.publish("network_backend",jsonString)
-	
-	pass # Replace with function body.
+

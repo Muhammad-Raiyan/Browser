@@ -150,9 +150,8 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 2.0
 margin_right = 36.0
-margin_bottom = 42.0
+margin_bottom = 40.0
 rect_min_size = Vector2( 30, 30 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -288,7 +287,7 @@ align = 1
 _sections_unfolded = [ "Custom Colors", "Custom Fonts", "Custom Styles", "Rect", "custom_styles/hover", "custom_styles/normal" ]
 
 [node name="Line2D" type="Line2D" parent="VBoxContainer"]
-points = PoolVector2Array( 14, 85, 1010, 85 )
+points = PoolVector2Array( 14, 80, 1010, 80 )
 width = 1.0
 default_color = Color( 0, 0, 0, 1 )
 texture_mode = 1603487248
@@ -314,7 +313,7 @@ tab_align = 1
 tabs_visible = false
 drag_to_rearrange_enabled = false
 script = ExtResource( 8 )
-_sections_unfolded = [ "Margin", "Size Flags" ]
+_sections_unfolded = [ "Anchor", "Margin" ]
 
 [connection signal="pressed" from="VBoxContainer/TabPanelHBox/ToolButton" to="." method="_on_add_tab_Button_pressed"]
 [connection signal="text_entered" from="VBoxContainer/SearchPanelHBox/UrlHBoxContainer/LineEdit" to="." method="_on_LineEdit_text_entered"]

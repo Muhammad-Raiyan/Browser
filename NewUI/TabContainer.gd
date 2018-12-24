@@ -20,13 +20,13 @@ func add_new_tab():
 	new_tab_node.set_name("TabNode")
 	new_tab_node.size_flags_vertical = SIZE_EXPAND_FILL
 	
-	var debugTexLabel = RichTextLabel.new()
-	debugTexLabel.set_name("debugTexLabel")
-	debugTexLabel.add_text("Debug Text")
-
-	debugTexLabel.anchor_right = 1
-	debugTexLabel.anchor_bottom = 0.99
-	new_tab_node.add_child(debugTexLabel)
+#	var debugTexLabel = RichTextLabel.new()
+#	debugTexLabel.set_name("debugTexLabel")
+#	debugTexLabel.add_text("Debug Text")
+#
+#	debugTexLabel.anchor_right = 1
+#	debugTexLabel.anchor_bottom = 0.99
+#	new_tab_node.add_child(debugTexLabel)
 	
 	add_child(new_tab_node)
 	
@@ -53,7 +53,14 @@ func append_text(text):
 	#infoLabel.newline()
 	infoLabel.add_text(text)
 	
-func clear_text():
-	var infoLabel = get_current_tab_control().get_child(0)
-	infoLabel.clear()
+func clear_page():
+	for i in range(0, get_current_tab_control().get_child_count()):
+		get_current_tab_control().get_child(i).queue_free()
+	
+func add_text_label(text):
+	var textLabel = RichTextLabel.new()
+	textLabel.add_text(text)
+	textLabel.anchor_right = 1
+	textLabel.anchor_bottom = 1
+	get_current_tab_control().add_child(textLabel)  
 
