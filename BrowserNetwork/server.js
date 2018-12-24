@@ -12,6 +12,7 @@ const SUBSCRIBERS_EXPECTED = 1;
 // Network stuff
 var page_req = require('request')
 var progress = require('request-progress')
+var urlRslv = require('url')
 
 // Parser stuff
 var parser = require('parse5');
@@ -82,6 +83,7 @@ function handle_request(request) {
             var document = parser.parse(body);
             var $ = cheerio.load(document)
             $(body).each((i, element)=>{
+                console.log(element)
                 default_text_box.item = "text"
                 default_text_box.param.text = $(element).text()
                 var msg = {
@@ -92,6 +94,10 @@ function handle_request(request) {
                 publisher.send([publisherEnvelope, JSON.stringify(msg)]);
             })
 
+            $('img').each((img)=>{
+                console.log($(img).attr(src))
+            })
+            
         } else if (response) {
             console.log('Reponse status not OK:', response.statusCode);
             publisher.send([publisherEnvelope, response.statusMessage]);
