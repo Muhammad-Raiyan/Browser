@@ -19,6 +19,14 @@ func _ready():
 func add_new_tab():
 	add_tab("New Tab")
 	
+#	var toolButtonControl = mainControl.get_child(0).get_child(0).get_child(1)
+#	var tb_old_x = toolButtonControl.get_begin().x
+#	var tb_old_y = toolButtonControl.get_begin().y
+#	toolButtonControl.set_begin(Vector2(tb_old_x+140, tb_old_y))
+#
+#	var tabPanel = mainControl.get_child(0).get_child(0).get_child(0)
+#	tabPanel.set_end(Vector2(tb_old_x+90, tb_old_y))
+	
 	var index = get_tab_count() -1
 	current_tab  = index
 	return index;

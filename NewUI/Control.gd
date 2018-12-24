@@ -54,7 +54,7 @@ func _process(delta):
 	if response.length()!=0:
 		var parsedResponse = parse_json(response)
 		var param = parsedResponse.data.param
-		if parsedResponse.data.item=="text":
+		if parsedResponse.data.item=="text" && param.text.length() > 5:
 				#print(param.text.length())
 				tab_container.add_text_label(param.text)
 		else:

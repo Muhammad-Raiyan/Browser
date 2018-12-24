@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Control.gd" type="Script" id=1]
 [ext_resource path="res://Tabs.gd" type="Script" id=2]
@@ -8,12 +8,6 @@
 [ext_resource path="res://icons/icons_rotate.png" type="Texture" id=6]
 [ext_resource path="res://icons/icons_menu_30.png" type="Texture" id=7]
 [ext_resource path="res://TabContainer.gd" type="Script" id=8]
-
-[sub_resource type="CanvasItemMaterial" id=1]
-
-render_priority = 0
-blend_mode = 0
-light_mode = 0
 
 [node name="Control" type="Control"]
 anchor_left = 0.0
@@ -44,7 +38,6 @@ alignment = 0
 _sections_unfolded = [ "Anchor", "Custom Constants", "Grow Direction", "Margin", "Material" ]
 
 [node name="TabPanelHBox" type="HBoxContainer" parent="VBoxContainer"]
-material = SubResource( 1 )
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
@@ -59,7 +52,7 @@ mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
 alignment = 0
-_sections_unfolded = [ "Anchor", "Margin", "Material", "Size Flags", "Visibility", "material" ]
+_sections_unfolded = [ "Anchor", "Grow Direction", "Margin", "Material", "material" ]
 
 [node name="Tabs" type="Tabs" parent="VBoxContainer/TabPanelHBox"]
 light_mask = 0
@@ -67,30 +60,30 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 984.0
+margin_right = 140.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 140, 30 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 0
 mouse_default_cursor_shape = 0
-size_flags_horizontal = 3
+size_flags_horizontal = 0
 size_flags_vertical = 1
 custom_colors/font_color_fg = Color( 0, 0, 0, 1 )
 tab_align = 0
 tab_close_display_policy = 2
-scrolling_enabled = true
+scrolling_enabled = false
 drag_to_rearrange_enabled = false
 script = ExtResource( 2 )
-_sections_unfolded = [ "Custom Constants", "Custom Styles", "Material", "Visibility", "custom_styles/button", "custom_styles/panel", "custom_styles/tab_bg", "custom_styles/tab_fg", "material", "theme" ]
+_sections_unfolded = [ "Anchor", "Custom Constants", "Custom Styles", "Margin", "Material", "Mouse", "Rect", "Size Flags", "Visibility", "custom_constants", "custom_styles", "custom_styles/button", "custom_styles/panel", "custom_styles/tab_bg", "material", "theme" ]
 
 [node name="ToolButton" type="ToolButton" parent="VBoxContainer/TabPanelHBox"]
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 988.0
-margin_right = 1024.0
+margin_left = 144.0
+margin_right = 180.0
 margin_bottom = 32.0
 rect_min_size = Vector2( 35, 30 )
 rect_pivot_offset = Vector2( 0, 0 )
