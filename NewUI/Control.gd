@@ -54,8 +54,8 @@ func _process(delta):
 	if response.length()!=0:
 		var parsedResponse = parse_json(response)
 		var param = parsedResponse.data.param
-		
-		if parsedResponse.data.item=="text":
+		if parsedResponse.data.item=="text" && param.text.length() > 5:
+			print(param.text.length())
 			tab_container.add_text_label(param.text)
 	pass
 
@@ -75,6 +75,7 @@ func close_browser():
 	#OS.kill(pid)
 	get_node("/root").get_tree().quit()
 	#get_tree().get_root().quit()
+
 
 func getallnodes(node):
     for N in node.get_children():

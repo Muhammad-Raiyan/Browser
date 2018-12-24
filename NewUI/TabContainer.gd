@@ -20,16 +20,23 @@ func add_new_tab():
 	new_tab_node.set_name("TabNode")
 	new_tab_node.size_flags_vertical = SIZE_EXPAND_FILL
 	
-#	var debugTexLabel = RichTextLabel.new()
-#	debugTexLabel.set_name("debugTexLabel")
-#	debugTexLabel.add_text("Debug Text")
-#
-#	debugTexLabel.anchor_right = 1
-#	debugTexLabel.anchor_bottom = 0.99
-#	new_tab_node.add_child(debugTexLabel)
+	
+	var scroll_container = ScrollContainer.new()
+	scroll_container.anchor_bottom = 1
+	scroll_container.anchor_right = 1
+	scroll_container.scroll_horizontal_enabled = false
+	
+	var vbox = VBoxContainer.new()
+	vbox.set_alignment(BoxContainer.ALIGN_BEGIN)
+	vbox.anchor_right = 1
+	vbox.anchor_bottom = 1
+	vbox.size_flags_horizontal = SIZE_EXPAND_FILL
+	
+	scroll_container.add_child(vbox)
+	new_tab_node.add_child(scroll_container)
+	
 	
 	add_child(new_tab_node)
-	
 	var index = get_tab_count()-1
 	current_tab = index
 	
@@ -54,13 +61,19 @@ func append_text(text):
 	infoLabel.add_text(text)
 	
 func clear_page():
-	for i in range(0, get_current_tab_control().get_child_count()):
-		get_current_tab_control().get_child(i).queue_free()
+	var tab_vbox = get_current_tab_control().get_child(0).get_child(0)
+	for i in range(0, tab_vbox.get_child_count()):
+		tab_vbox.get_child(i).queue_free()
 	
 func add_text_label(text):
-	var textLabel = RichTextLabel.new()
-	textLabel.add_text(text)
+	var textLabel = Label.new()
+	textLabel.text = text
 	textLabel.anchor_right = 1
 	textLabel.anchor_bottom = 1
-	get_current_tab_control().add_child(textLabel)  
+	textLabel.set_autowrap(true)
+	get_current_tab_control().get_child(0).get_child(0).add_child(textLabel)
+	
+	
+	 
+	
 
