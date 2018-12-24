@@ -4,11 +4,14 @@
   "description": "",
   "main": "render.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node render.js"
   },
   "author": "Muhammad Islam",
   "license": "ISC",
   "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "parse5": "^5.1.0",
     "zeromq": "^4.6.0"
   }
 }

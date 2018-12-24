@@ -50,7 +50,7 @@ func get_active_tab_id():
 	
 func append_text(text):
 	var infoLabel = get_current_tab_control().get_child(0)
-	infoLabel.newline()
+	#infoLabel.newline()
 	infoLabel.add_text(text)
 	
 func clear_text():

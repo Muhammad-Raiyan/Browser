@@ -128,7 +128,6 @@ columns = 3
 _sections_unfolded = [ "Anchor", "Margin", "Material", "Size Flags", "Visibility" ]
 
 [node name="ButtonHBoxPanel" type="HBoxContainer" parent="VBoxContainer/SearchPanelHBox"]
-editor/display_folded = true
 modulate = Color( 0.956863, 0.901961, 0.901961, 1 )
 anchor_left = 0.0
 anchor_top = 0.0
@@ -151,8 +150,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
+margin_top = 2.0
 margin_right = 36.0
-margin_bottom = 40.0
+margin_bottom = 42.0
 rect_min_size = Vector2( 30, 30 )
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
@@ -301,7 +301,7 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 90.0
+margin_top = 80.0
 margin_right = 1024.0
 margin_bottom = 600.0
 rect_pivot_offset = Vector2( 0, 0 )
