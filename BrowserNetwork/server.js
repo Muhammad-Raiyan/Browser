@@ -34,21 +34,21 @@ synchronizeSubscription.connect('tcp://localhost:5100')
 synchronizeSubscription.send('')
 
 // Publisher synchronization
-var subscriberCount = 0;
-synchronizePublisher.on('message', function (request) {
-    subscriberCount++;
-    synchronizePublisher.send('')
-    if (subscriberCount >= SUBSCRIBERS_EXPECTED){
-        console.log("Publisher Synched")
-    }
-})
-
+var subscriptionCount = 0;
 
 synchronizePublisher.bind('tcp://*:6100', function(err){
     if(err)
         console.log(err)
     else
         console.log('Listening on 6100…')
+})
+
+synchronizePublisher.on('message', function (request) {
+    subscriptionCount++;
+    synchronizePublisher.send('')
+    if (subscriptionCount <= SUBSCRIBERS_EXPECTED){
+        console.log("Network Backend Subscribers connected: " + subscriptionCount)
+    }
 })
 
 
@@ -59,7 +59,6 @@ publisher.bind('tcp://*:6101', function (err) {
     else
         console.log("Publishing on 6101...")
 })
-
 
 // Function to handle requests
 function handle_request(request) {
@@ -114,8 +113,11 @@ function handle_request(request) {
         //publisher.send([progressEnvelope, JSON.stringify(stats)])
 
     })
-    
 }
+
+// Conenct subscriber to port
+subscriber.connect("tcp://localhost:5101");
+subscriber.subscribe(subscriberEnvelope);
 
 // Initializing and listening to port
 subscriber.on("message", function(request){
@@ -133,9 +135,6 @@ subscriber.on("message", function(request){
         handle_request(request);
     }
 })
-
-subscriber.connect("tcp://localhost:5101");
-subscriber.subscribe(subscriberEnvelope);
 
 // Function to close all sockets
 function close_sockets(){

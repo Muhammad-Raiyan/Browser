@@ -7,7 +7,7 @@ var synchronizePublisher = zmq.socket("rep");
 const publisherEnvelope = "gui_backend"
 const subscriberEnvelope = "render_backend"
 const progressEnvelope = "req_progress"
-const SUBSCRIBERS_EXPECTED = 1;
+const SUBSCRIBERS_EXPECTED = 2;
 
 // Parser stuff
 var parser = require('parse5');
@@ -26,7 +26,7 @@ const default_text_box = {
 }     
 
 // Subscription Synchronization
-synchronizeSubscription.connect('tcp://localhost:7100')
+synchronizeSubscription.connect('tcp://localhost:6100')
 synchronizeSubscription.send('')
 
 // Publisher synchronization
@@ -40,7 +40,7 @@ synchronizePublisher.on('message', function (request) {
 })
 
 
-synchronizePublisher.bind('tcp://*:6100', function(err){
+synchronizePublisher.bind('tcp://*:7100', function(err){
     if(err)
         console.log(err)
     else
@@ -49,13 +49,15 @@ synchronizePublisher.bind('tcp://*:6100', function(err){
 
 
 // Bind publisher to port
-publisher.bind('tcp://*:6101', function (err) {
+publisher.bind('tcp://*:7101', function (err) {
     if (err)
         console.log(err)
     else
         console.log("Publishing on 6101...")
 })
 
+subscriber.connect("tcp://localhost:6101");
+subscriber.subscribe(subscriberEnvelope);
 
 // Function to handle requests
 function render_request(body) {
@@ -93,9 +95,6 @@ subscriber.on("message", function(request){
         render_request(request);
     }
 })
-
-subscriber.connect("tcp://localhost:5101");
-subscriber.subscribe(subscriberEnvelope);
 
 // Function to close all sockets
 function close_sockets(){
